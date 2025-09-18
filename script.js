@@ -38,10 +38,10 @@ function createTask(taskText, isDone = false, createdAt = null, updatedAt = null
   const createdTime = createdAt || now.toISOString();
   const updatedTime = updatedAt || createdTime;
 
-  timestamps.textContent = `submit: ${new Date(createdTime).toLocaleString()} | ویرایش: ${new Date(updatedTime).toLocaleString()}`;
+  timestamps.textContent = `ثبت: ${new Date(createdTime).toLocaleString()} | ویرایش: ${new Date(updatedTime).toLocaleString()}`;
 
   const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "delete";
+  deleteBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
   deleteBtn.classList.add("delete-btn");
 
   li.appendChild(span);
@@ -59,8 +59,11 @@ function createTask(taskText, isDone = false, createdAt = null, updatedAt = null
 
   // delete
   deleteBtn.addEventListener("click", function () {
-    li.remove();
-    saveTasks();
+    li.classList.add("fade-out");
+    setTimeout(() => {
+      li.remove();
+      saveTasks();
+    }, 300);
   });
 
   // edit
